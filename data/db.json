@@ -1,0 +1,112 @@
+{
+  "stations": [
+    {
+      "id": "EV-BKK-001",
+      "name": "สถานีชาร์จ EV - สยามพารากอน (Siam Paragon)",
+      "location": "ชั้น B1 เสา E15, กรุงเทพฯ",
+      "connectors": [
+        {
+          "id": "C1",
+          "type": "CCS2",
+          "power": 120,
+          "pricePerKwh": 7.5,
+          "status": "available",
+          "currentSessionId": null
+        },
+        {
+          "id": "C2",
+          "type": "CCS2",
+          "power": 120,
+          "pricePerKwh": 7.5,
+          "status": "available"
+        },
+        {
+          "id": "C3",
+          "type": "Type2",
+          "power": 22,
+          "pricePerKwh": 6.5,
+          "status": "available",
+          "currentSessionId": null
+        }
+      ]
+    },
+    {
+      "id": "EV-BKK-002",
+      "name": "สถานีชาร์จ EV - สุขุมวิท 23 (Sukhumvit 23)",
+      "location": "ลานจอดรถตึก Interchange 21, กรุงเทพฯ",
+      "connectors": [
+        {
+          "id": "C1",
+          "type": "CCS2",
+          "power": 150,
+          "pricePerKwh": 8,
+          "status": "available"
+        },
+        {
+          "id": "C2",
+          "type": "CHAdeMO",
+          "power": 50,
+          "pricePerKwh": 7,
+          "status": "available"
+        }
+      ]
+    },
+    {
+      "id": "EV-CNX-001",
+      "name": "สถานีชาร์จ EV - เซ็นทรัลเชียงใหม่ (Central Chiangmai)",
+      "location": "ชั้น G โซนจอดรถด้านหน้า, เชียงใหม่",
+      "connectors": [
+        {
+          "id": "C1",
+          "type": "CCS2",
+          "power": 120,
+          "pricePerKwh": 7.5,
+          "status": "available"
+        },
+        {
+          "id": "C2",
+          "type": "Type2",
+          "power": 22,
+          "pricePerKwh": 6.5,
+          "status": "available"
+        }
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "id": "SESS-896963",
+      "chargerId": "EV-BKK-001",
+      "connectorId": "C1",
+      "status": "completed",
+      "targetType": "amount",
+      "targetValue": 500,
+      "energyDelivered": 63.79,
+      "soc": 100,
+      "cost": 478,
+      "powerKW": 0,
+      "paymentStatus": "paid",
+      "paymentQrData": "00020101021130380016A000000677010111011300668123456780215500.0053037645802TH",
+      "carPlate": "ศก614",
+      "startTime": "2026-06-11T04:38:27.226Z",
+      "endTime": "2026-06-11T04:39:31.018Z"
+    },
+    {
+      "id": "SESS-687561",
+      "chargerId": "EV-BKK-001",
+      "connectorId": "C3",
+      "status": "completed",
+      "targetType": "full",
+      "targetValue": 100,
+      "energyDelivered": 82.25,
+      "soc": 100,
+      "cost": 535,
+      "powerKW": 0,
+      "paymentStatus": "paid",
+      "paymentQrData": "00020101021130380016A000000677010111011300668123456780215100.0053037645802TH",
+      "carPlate": "กข-9999",
+      "startTime": "2026-06-11T08:37:03.035Z",
+      "endTime": "2026-06-11T08:44:31.682Z"
+    }
+  ]
+}
