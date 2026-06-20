@@ -99,7 +99,7 @@ export default function ReceiptPage({ params }: PageProps) {
   if (isLoading) {
     return (
       <div className="flex-1 flex flex-col justify-center items-center p-8 max-w-md mx-auto w-full">
-        <div className="h-10 w-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+        <div className="h-10 w-10 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin mb-4"></div>
         <p className="text-sm text-zinc-400">กำลังดึงข้อมูลใบเสร็จรับเงิน...</p>
       </div>
     );
@@ -120,7 +120,7 @@ export default function ReceiptPage({ params }: PageProps) {
     <div className="flex-1 flex flex-col justify-start items-center px-4 py-6 max-w-md mx-auto w-full">
       {/* Success Animation Header */}
       <div className="text-center mb-6 mt-4">
-        <div className="inline-flex items-center justify-center p-3 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mb-4 animate-scale-in">
+        <div className="inline-flex items-center justify-center p-3 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-4 animate-scale-in">
           <CheckCircle2 size={40} />
         </div>
         <h1 className="text-2xl font-bold text-slate-100">การชาร์จเสร็จสิ้น</h1>
@@ -131,8 +131,8 @@ export default function ReceiptPage({ params }: PageProps) {
       {session && (
         <div className="w-full glass-panel rounded-2xl p-6 border border-zinc-800/80 mb-6 relative">
           {/* Top circle punches for receipt ticket effect */}
-          <div className="absolute -left-3 top-1/3 w-6 h-6 rounded-full bg-[#090a0f] border-r border-zinc-800/80"></div>
-          <div className="absolute -right-3 top-1/3 w-6 h-6 rounded-full bg-[#090a0f] border-l border-zinc-800/80"></div>
+          <div className="absolute -left-3 top-1/3 w-6 h-6 rounded-full bg-[#07080e] border-r border-zinc-800/80"></div>
+          <div className="absolute -right-3 top-1/3 w-6 h-6 rounded-full bg-[#07080e] border-l border-zinc-800/80"></div>
 
           {/* Receipt header */}
           <div className="flex justify-between items-start pb-4 border-b border-dashed border-zinc-800 mb-5">
@@ -189,12 +189,12 @@ export default function ReceiptPage({ params }: PageProps) {
           <div className="flex justify-between items-center bg-zinc-950 p-4 rounded-xl border border-zinc-900">
             <div>
               <span className="text-3xs uppercase tracking-widest text-zinc-500 font-semibold block">ยอดชำระสุทธิ</span>
-              <span className="text-2xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded font-bold mt-1 inline-block">
+              <span className="text-2xs text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-1.5 py-0.5 rounded font-bold mt-1 inline-block">
                 ชำระเงินสำเร็จ
               </span>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-extrabold font-mono text-emerald-400">฿{session.cost}</span>
+              <span className="text-2xl font-extrabold font-mono text-cyan-400">฿{session.cost}</span>
               <span className="text-3xs text-zinc-500 block">ชำระผ่าน PromptPay QR</span>
             </div>
           </div>
@@ -204,7 +204,7 @@ export default function ReceiptPage({ params }: PageProps) {
       {/* Done button */}
       <button
         onClick={() => router.push("/")}
-        className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/10 active:scale-[0.98]"
+        className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-cyan-500/10 active:scale-[0.98]"
       >
         <span>เสร็จสิ้นและกลับหน้าหลัก</span>
         <ArrowRight size={16} />

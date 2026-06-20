@@ -3,7 +3,6 @@
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Zap, MapPin, CreditCard, CheckCircle2, ShieldCheck, Info } from "lucide-react";
-import Image from "next/image";
 
 interface Connector {
   id: string;
@@ -145,7 +144,7 @@ export default function ChargerPage({ params }: PageProps) {
   if (isLoading) {
     return (
       <div className="flex-1 flex flex-col justify-center items-center p-8 max-w-md mx-auto w-full">
-        <div className="h-10 w-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+        <div className="h-10 w-10 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin mb-4"></div>
         <p className="text-sm text-zinc-400">กำลังโหลดรายละเอียดตู้ชาร์จ...</p>
       </div>
     );
@@ -165,8 +164,6 @@ export default function ChargerPage({ params }: PageProps) {
       </div>
     );
   }
-
-  const selectedConn = station?.connectors.find(c => c.id === selectedConnectorId);
 
   return (
     <div className="flex-1 flex flex-col justify-start items-center px-4 py-6 max-w-md mx-auto w-full relative">
@@ -189,7 +186,7 @@ export default function ChargerPage({ params }: PageProps) {
           {/* Station Title Banner */}
           <div className="w-full mb-6">
             <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-              <Zap size={20} className="text-emerald-400 shrink-0" />
+              <Zap size={20} className="text-cyan-400 shrink-0" />
               <span>{station.name}</span>
             </h1>
             <p className="text-xs text-zinc-400 mt-1 flex items-start gap-1">
@@ -215,14 +212,14 @@ export default function ChargerPage({ params }: PageProps) {
                       !isAvail 
                         ? "opacity-50 border-zinc-900 bg-zinc-950/40 cursor-not-allowed" 
                         : isSelected
-                        ? "border-emerald-500 bg-emerald-500/5 cursor-pointer glow-active-green"
+                        ? "border-cyan-500 bg-cyan-500/5 cursor-pointer glow-active-cyan"
                         : "border-zinc-800 bg-zinc-900/30 hover:border-zinc-700 cursor-pointer"
                     }`}
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
                         <span className={`p-2 rounded-lg font-bold text-2xs ${
-                          isSelected ? "bg-emerald-500/20 text-emerald-400" : "bg-zinc-800 text-zinc-400"
+                          isSelected ? "bg-cyan-500/20 text-cyan-400" : "bg-zinc-800 text-zinc-400"
                         }`}>
                           {c.type}
                         </span>
@@ -237,7 +234,7 @@ export default function ChargerPage({ params }: PageProps) {
                       </div>
                       <span className={`text-2xs font-bold px-2 py-0.5 rounded ${
                         c.status === "available"
-                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                          ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
                           : c.status === "charging"
                           ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
                           : "bg-zinc-800 text-zinc-500"
@@ -270,7 +267,7 @@ export default function ChargerPage({ params }: PageProps) {
                   }}
                   className={`py-2 px-1 rounded-lg text-2xs font-semibold capitalize transition-all cursor-pointer ${
                     targetType === type
-                      ? "bg-zinc-800 text-emerald-400"
+                      ? "bg-zinc-800 text-cyan-400"
                       : "text-zinc-400 hover:text-slate-100"
                   }`}
                 >
@@ -284,7 +281,7 @@ export default function ChargerPage({ params }: PageProps) {
               {targetType === "full" && (
                 <div className="text-center py-2">
                   <p className="text-xs text-zinc-400">ชาร์จไฟจนเต็มความจุของแบตเตอรี่รถยนต์ไฟฟ้า (100% SOC)</p>
-                  <p className="text-sm font-bold text-emerald-400 mt-1">ระบบจะคิดเงินจริงตามปริมาณไฟฟ้าที่จ่ายจริง</p>
+                  <p className="text-sm font-bold text-cyan-400 mt-1">ระบบจะคิดเงินจริงตามปริมาณไฟฟ้าที่จ่ายจริง</p>
                 </div>
               )}
 
@@ -292,13 +289,13 @@ export default function ChargerPage({ params }: PageProps) {
                 <div>
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-xs text-zinc-400">ระบุจำนวนเงิน</span>
-                    <span className="text-xs font-bold text-emerald-400">บาท</span>
+                    <span className="text-xs font-bold text-cyan-400">บาท</span>
                   </div>
                   <input
                     type="number"
                     value={targetValue}
                     onChange={(e) => setTargetValue(e.target.value)}
-                    className="w-full py-2 px-3 rounded-lg bg-zinc-950 border border-zinc-800 text-center font-mono text-lg font-bold text-slate-100 outline-none focus:border-emerald-500"
+                    className="w-full py-2 px-3 rounded-lg bg-zinc-950 border border-zinc-800 text-center font-mono text-lg font-bold text-slate-100 outline-none focus:border-cyan-500"
                   />
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {["100", "300", "500", "1000"].map((p) => (
@@ -319,13 +316,13 @@ export default function ChargerPage({ params }: PageProps) {
                 <div>
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-xs text-zinc-400">ระบุหน่วยไฟฟ้า</span>
-                    <span className="text-xs font-bold text-emerald-400">kWh</span>
+                    <span className="text-xs font-bold text-cyan-400">kWh</span>
                   </div>
                   <input
                     type="number"
                     value={targetValue}
                     onChange={(e) => setTargetValue(e.target.value)}
-                    className="w-full py-2 px-3 rounded-lg bg-zinc-950 border border-zinc-800 text-center font-mono text-lg font-bold text-slate-100 outline-none focus:border-emerald-500"
+                    className="w-full py-2 px-3 rounded-lg bg-zinc-950 border border-zinc-800 text-center font-mono text-lg font-bold text-slate-100 outline-none focus:border-cyan-500"
                   />
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {["10", "20", "40", "60"].map((p) => (
@@ -346,13 +343,13 @@ export default function ChargerPage({ params }: PageProps) {
                 <div>
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-xs text-zinc-400">ระบุระยะเวลา</span>
-                    <span className="text-xs font-bold text-emerald-400">นาที</span>
+                    <span className="text-xs font-bold text-cyan-400">นาที</span>
                   </div>
                   <input
                     type="number"
                     value={targetValue}
                     onChange={(e) => setTargetValue(e.target.value)}
-                    className="w-full py-2 px-3 rounded-lg bg-zinc-950 border border-zinc-800 text-center font-mono text-lg font-bold text-slate-100 outline-none focus:border-emerald-500"
+                    className="w-full py-2 px-3 rounded-lg bg-zinc-950 border border-zinc-800 text-center font-mono text-lg font-bold text-slate-100 outline-none focus:border-cyan-500"
                   />
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {["15", "30", "45", "60"].map((p) => (
@@ -381,7 +378,7 @@ export default function ChargerPage({ params }: PageProps) {
               placeholder="กรอกทะเบียนรถยนต์ (เช่น 3กข-9999 กทม.)"
               value={carPlate}
               onChange={(e) => setCarPlate(e.target.value)}
-              className="w-full py-3 px-4 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 outline-none text-slate-100 transition-all placeholder:text-zinc-600 text-sm"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-cyan-500 outline-none text-slate-100 transition-all placeholder:text-zinc-600 text-sm"
             />
           </div>
 
@@ -395,7 +392,7 @@ export default function ChargerPage({ params }: PageProps) {
           <button
             onClick={handleStartProcess}
             disabled={isSubmitting || !selectedConnectorId}
-            className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/10 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-cyan-500/10 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <CreditCard size={18} />
             <span>ชำระเงินและเริ่มชาร์จ</span>
@@ -408,7 +405,7 @@ export default function ChargerPage({ params }: PageProps) {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm animate-fade-in">
           <div className="w-full max-w-sm rounded-2xl border border-zinc-800 bg-[#0c0d14] p-6 text-center shadow-2xl">
             <div className="flex justify-between items-center mb-6">
-              <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">
+              <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest">
                 การชำระเงินจำลอง
               </span>
               <button 
@@ -466,7 +463,7 @@ export default function ChargerPage({ params }: PageProps) {
             {/* Total Amount Details */}
             <div className="mb-6 bg-zinc-950 py-3 px-4 rounded-xl border border-zinc-900">
               <span className="text-2xs text-zinc-500 block">จำนวนเงินชำระ</span>
-              <span className="text-xl font-bold font-mono text-emerald-400">
+              <span className="text-xl font-bold font-mono text-cyan-400">
                 ฿{targetType === "full" ? "1,000.00" : Number(targetValue).toFixed(2)}
               </span>
               <span className="text-3xs text-zinc-500 block mt-1">
@@ -488,7 +485,7 @@ export default function ChargerPage({ params }: PageProps) {
             <button
               onClick={handleSimulatePaymentSuccess}
               disabled={isSubmitting}
-              className="w-full py-3.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
             >
               {isSubmitting ? (
                 <span className="h-4 w-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></span>

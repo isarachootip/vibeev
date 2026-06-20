@@ -70,14 +70,14 @@ export default function Home() {
   return (
     <div className="flex-1 flex flex-col justify-start items-center px-4 py-8 max-w-md mx-auto w-full">
       {/* Hero Badge */}
-      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-6">
+      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-6">
         <Zap size={12} className="animate-pulse" />
         <span>ระบบชาร์จรถไฟฟ้าอัจฉริยะ 100% Mobile Web</span>
       </div>
 
       {/* Main Banner / Title */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-slate-100 via-slate-200 to-emerald-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-slate-100 via-slate-200 to-cyan-400 bg-clip-text text-transparent">
           สแกน จ่าย เริ่มชาร์จ
         </h1>
         <p className="text-sm text-zinc-400">
@@ -87,16 +87,16 @@ export default function Home() {
 
       {/* QR Code / Charger Code Scanner Mock */}
       <div className="w-full glass-panel rounded-2xl p-6 border border-zinc-800/80 mb-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl"></div>
+        <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-full blur-2xl"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl"></div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex justify-center mb-4">
-            <div className="relative p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 flex items-center justify-center glow-active-green">
-              <QrCode size={48} className="text-emerald-400" />
+            <div className="relative p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 flex items-center justify-center glow-active-cyan">
+              <QrCode size={48} className="text-cyan-400" />
               <div className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function Home() {
                 setChargerIdInput(e.target.value);
                 setError("");
               }}
-              className="w-full text-center font-mono text-lg uppercase tracking-wider py-3 px-4 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-slate-100 transition-all placeholder:text-zinc-600"
+              className="w-full text-center font-mono text-lg uppercase tracking-wider py-3 px-4 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none text-slate-100 transition-all placeholder:text-zinc-600"
             />
           </div>
 
@@ -127,7 +127,7 @@ export default function Home() {
 
           <button
             type="submit"
-            className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/10 hover:shadow-emerald-500/20 active:scale-[0.98]"
+            className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-bold text-black flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20 active:scale-[0.98]"
           >
             <span>ดำเนินการต่อ</span>
             <ArrowRight size={16} />
@@ -138,11 +138,11 @@ export default function Home() {
       {/* Safety & Secure badges */}
       <div className="w-full flex justify-between gap-4 px-2 py-3 rounded-xl bg-zinc-950/40 border border-zinc-900 mb-8">
         <div className="flex items-center gap-2 text-zinc-400">
-          <Shield size={14} className="text-emerald-400" />
+          <Shield size={14} className="text-cyan-400" />
           <span className="text-2xs font-medium">เข้ารหัสความปลอดภัย SSL</span>
         </div>
         <div className="flex items-center gap-2 text-zinc-400">
-          <Zap size={14} className="text-emerald-400" />
+          <Zap size={14} className="text-cyan-400" />
           <span className="text-2xs font-medium">เชื่อมโยง API สถานีชาร์จตรง</span>
         </div>
       </div>
@@ -151,7 +151,7 @@ export default function Home() {
       <div className="w-full">
         <div className="flex justify-between items-center mb-4 px-1">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">สถานีชาร์จใกล้คุณ (สำหรับการสาธิต)</h2>
-          <button onClick={fetchStations} className="text-2xs text-emerald-400 hover:underline">รีเฟรช</button>
+          <button onClick={fetchStations} className="text-2xs text-cyan-400 hover:underline">รีเฟรช</button>
         </div>
 
         {isLoading ? (
@@ -168,20 +168,20 @@ export default function Home() {
                 <div
                   key={station.id}
                   onClick={() => router.push(`/charger/${station.id}`)}
-                  className="w-full text-left p-4 rounded-xl bg-zinc-900/30 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-900/50 transition-all cursor-pointer group"
+                  className="w-full text-left p-4 rounded-xl bg-zinc-900/30 border border-zinc-800 hover:border-cyan-500/50 hover:bg-zinc-900/50 transition-all cursor-pointer group"
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <span className="font-mono text-2xs text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    <span className="font-mono text-2xs text-cyan-400 font-bold bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
                       {station.id}
                     </span>
                     <span className={`text-2xs font-bold px-2 py-0.5 rounded ${
-                      avail > 0 ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20" : "bg-zinc-800 text-zinc-400"
+                      avail > 0 ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/20" : "bg-zinc-800 text-zinc-400"
                     }`}>
                       {avail > 0 ? `ว่าง ${avail} หัวชาร์จ` : "เต็มทุกช่อง"}
                     </span>
                   </div>
                   
-                  <h3 className="font-semibold text-slate-100 text-sm mb-1 group-hover:text-emerald-400 transition-colors">
+                  <h3 className="font-semibold text-slate-100 text-sm mb-1 group-hover:text-cyan-400 transition-colors">
                     {station.name}
                   </h3>
                   
@@ -196,7 +196,7 @@ export default function Home() {
                         key={idx}
                         className={`text-3xs font-mono px-1.5 py-0.5 rounded border ${
                           c.status === "available"
-                            ? "border-emerald-500/20 bg-emerald-500/5 text-emerald-400"
+                            ? "border-cyan-500/20 bg-cyan-500/5 text-cyan-400"
                             : c.status === "charging" || c.status === "occupied"
                             ? "border-amber-500/20 bg-amber-500/5 text-amber-400"
                             : "border-zinc-800 bg-zinc-950 text-zinc-600"

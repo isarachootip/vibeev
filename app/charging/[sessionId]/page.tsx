@@ -123,7 +123,7 @@ export default function ChargingPage({ params }: PageProps) {
   if (isLoading) {
     return (
       <div className="flex-1 flex flex-col justify-center items-center p-8 max-w-md mx-auto w-full">
-        <div className="h-10 w-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+        <div className="h-10 w-10 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin mb-4"></div>
         <p className="text-sm text-zinc-400">กำลังเชื่อมต่อกับระบบควบคุมเครื่องชาร์จ...</p>
       </div>
     );
@@ -192,7 +192,7 @@ export default function ChargingPage({ params }: PageProps) {
                 {session.soc}%
               </span>
               <span className="text-3xs text-zinc-500 uppercase tracking-widest mt-1">State of Charge</span>
-              <span className="text-2xs text-emerald-400 font-mono font-bold mt-1.5 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+              <span className="text-2xs text-cyan-400 font-mono font-bold mt-1.5 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full">
                 ⚡ {session.powerKW} kW
               </span>
             </div>
@@ -228,10 +228,10 @@ export default function ChargingPage({ params }: PageProps) {
             <div className="glass-panel p-4 rounded-xl text-left relative overflow-hidden">
               <div className="flex justify-between items-center mb-1 text-zinc-500">
                 <span className="text-3xs uppercase tracking-wider font-semibold">ค่าใช้จ่ายสะสม</span>
-                <DollarSign size={14} className="text-emerald-400" />
+                <DollarSign size={14} className="text-cyan-400" />
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-lg font-bold font-mono text-emerald-400">฿{session.cost}</span>
+                <span className="text-lg font-bold font-mono text-cyan-400 font-mono">฿{session.cost}</span>
                 <span className="text-2xs text-zinc-500">บาท</span>
               </div>
             </div>

@@ -139,8 +139,8 @@ export default function AdminDashboard() {
       {/* Header and Controls */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <div className="flex items-center gap-2 text-2xs text-emerald-400 font-bold uppercase tracking-wider">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div className="flex items-center gap-2 text-2xs text-cyan-400 font-bold uppercase tracking-wider">
+            <span className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></span>
             Live Admin Monitoring Control Panel
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight mt-1 text-slate-100 font-sans">
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
 
       {/* Notifications */}
       {successMsg && (
-        <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm flex items-center gap-2">
+        <div className="mb-6 p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm flex items-center gap-2">
           <CheckCircle2 size={16} />
           <span>{successMsg}</span>
         </div>
@@ -182,16 +182,16 @@ export default function AdminDashboard() {
         <div className="glass-panel p-5 rounded-2xl border border-zinc-800 text-left relative overflow-hidden">
           <div className="flex justify-between items-center text-zinc-500 mb-2">
             <span className="text-3xs uppercase tracking-wider font-semibold">รายได้รวมสะสม</span>
-            <DollarSign size={18} className="text-emerald-400" />
+            <DollarSign size={18} className="text-cyan-400" />
           </div>
-          <span className="text-2xl font-bold text-emerald-400 font-mono">฿{totalRevenue.toLocaleString("th-TH")}</span>
+          <span className="text-2xl font-bold text-cyan-400 font-mono">฿{totalRevenue.toLocaleString("th-TH")}</span>
           <span className="text-3xs text-zinc-500 block mt-1">จากคำสั่งชำระเงินที่สำเร็จ</span>
         </div>
 
         <div className="glass-panel p-5 rounded-2xl border border-zinc-800 text-left relative overflow-hidden">
           <div className="flex justify-between items-center text-zinc-500 mb-2">
             <span className="text-3xs uppercase tracking-wider font-semibold">ปริมาณไฟฟ้าที่จ่ายรวม</span>
-            <Zap size={18} className="text-emerald-400" />
+            <Zap size={18} className="text-cyan-400" />
           </div>
           <span className="text-2xl font-bold text-slate-100 font-mono">{totalEnergy.toFixed(1)} <span className="text-xs text-zinc-500">kWh</span></span>
           <span className="text-3xs text-zinc-500 block mt-1">พลังงานไฟฟ้าสะสมที่เติมให้รถ</span>
@@ -209,9 +209,9 @@ export default function AdminDashboard() {
         <div className="glass-panel p-5 rounded-2xl border border-zinc-800 text-left relative overflow-hidden">
           <div className="flex justify-between items-center text-zinc-500 mb-2">
             <span className="text-3xs uppercase tracking-wider font-semibold">หัวชาร์จพร้อมใช้ (Available)</span>
-            <CheckCircle2 size={18} className="text-emerald-400" />
+            <CheckCircle2 size={18} className="text-cyan-400" />
           </div>
-          <span className="text-2xl font-bold text-emerald-400">{availableCount}</span>
+          <span className="text-2xl font-bold text-cyan-400">{availableCount}</span>
           <span className="text-3xs text-zinc-500 block mt-1">หัวชาร์จออนไลน์ว่างรอใช้</span>
         </div>
       </div>
@@ -221,7 +221,7 @@ export default function AdminDashboard() {
         {/* Stations Live Status Monitor */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           <h2 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-            <Zap size={18} className="text-emerald-400" />
+            <Zap size={18} className="text-cyan-400" />
             <span>สถานะและควบคุมสถานีชาร์จแบบ Real-Time</span>
           </h2>
 
@@ -240,7 +240,7 @@ export default function AdminDashboard() {
                       <h3 className="font-bold text-base text-slate-200">{station.name}</h3>
                       <p className="text-2xs text-zinc-500 mt-0.5">{station.location}</p>
                     </div>
-                    <span className="font-mono text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-0.5 rounded-lg">
+                    <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/25 px-2.5 py-0.5 rounded-lg">
                       {station.id}
                     </span>
                   </div>
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
                         <div key={c.id} className="p-3 rounded-xl bg-zinc-950 border border-zinc-900 flex flex-col justify-between gap-3 relative overflow-hidden">
                           {/* Colored status line */}
                           <div className={`absolute top-0 left-0 right-0 h-1 ${
-                            c.status === "available" ? "bg-emerald-500" : c.status === "charging" ? "bg-blue-500" : c.status === "occupied" ? "bg-amber-500" : "bg-zinc-700"
+                            c.status === "available" ? "bg-cyan-500" : c.status === "charging" ? "bg-blue-500" : c.status === "occupied" ? "bg-amber-500" : "bg-zinc-700"
                           }`}></div>
 
                           <div className="flex justify-between items-start pt-1">
@@ -264,7 +264,7 @@ export default function AdminDashboard() {
                             </div>
                             <span className={`text-3xs font-bold px-1.5 py-0.5 rounded ${
                               c.status === "available" 
-                                ? "bg-emerald-500/15 text-emerald-400" 
+                                ? "bg-cyan-500/15 text-cyan-400" 
                                 : c.status === "charging" 
                                 ? "bg-blue-500/15 text-blue-400 animate-pulse" 
                                 : c.status === "occupied" 
@@ -318,7 +318,7 @@ export default function AdminDashboard() {
         {/* Analytics Summary & Graphic Report */}
         <div className="flex flex-col gap-6">
           <h2 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-            <Settings size={18} className="text-emerald-400" />
+            <Settings size={18} className="text-cyan-400" />
             <span>รายงานและยอดการใช้งาน</span>
           </h2>
 
@@ -341,8 +341,8 @@ export default function AdminDashboard() {
                   <rect x="18" y="20" width="8" height="25" rx="1" fill="#3b82f6" opacity="0.3" />
                   <rect x="31" y="8" width="8" height="37" rx="1" fill="#3b82f6" opacity="0.3" />
                   <rect x="44" y="12" width="8" height="33" rx="1" fill="#3b82f6" opacity="0.3" />
-                  <rect x="57" y="18" width="8" height="27" rx="1" fill="#10b981" />
-                  <rect x="70" y="5" width="8" height="40" rx="1" fill="#10b981" />
+                  <rect x="57" y="18" width="8" height="27" rx="1" fill="#06b6d4" />
+                  <rect x="70" y="5" width="8" height="40" rx="1" fill="#06b6d4" />
                   <rect x="83" y="10" width="8" height="35" rx="1" fill="#3b82f6" opacity="0.3" />
 
                   {/* Labels */}
@@ -350,7 +350,7 @@ export default function AdminDashboard() {
                   <text x="22" y="48" fontSize="3" fill="#6b7280" textAnchor="middle">T</text>
                   <text x="35" y="48" fontSize="3" fill="#6b7280" textAnchor="middle">W</text>
                   <text x="48" y="48" fontSize="3" fill="#6b7280" textAnchor="middle">T</text>
-                  <text x="61" y="48" fontSize="3" fill="#10b981" textAnchor="middle" fontWeight="bold">F (วันนี้)</text>
+                  <text x="61" y="48" fontSize="3" fill="#06b6d4" textAnchor="middle" fontWeight="bold">F (วันนี้)</text>
                   <text x="74" y="48" fontSize="3" fill="#6b7280" textAnchor="middle">S</text>
                   <text x="87" y="48" fontSize="3" fill="#6b7280" textAnchor="middle">S</text>
                 </svg>
@@ -380,8 +380,8 @@ export default function AdminDashboard() {
             </div>
 
             {/* Instruction manual for the President */}
-            <div className="p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-3xs text-zinc-400">
-              <strong className="text-emerald-400 block mb-1">💡 คำแนะนำในการทดสอบสำหรับท่านประธาน:</strong>
+            <div className="p-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/10 text-3xs text-zinc-400">
+              <strong className="text-cyan-400 block mb-1">💡 คำแนะนำในการทดสอบสำหรับท่านประธาน:</strong>
               1. เปิดหน้าเว็บบนมือถือเพื่อทำรายการสแกนตู้และชาร์จไฟ<br />
               2. สังเกตหน้าแดชบอร์ดนี้จะอัปเดตสถิติและสถานะตู้ชาร์จเป็น "ชาร์จอยู่" หรือ "รอชำระเงิน" แบบ Real-Time ทันที<br />
               3. กดปุ่มหยุดชาร์จด่วนหรือรีเซ็ต เพื่อจำลองสั่งการระยะไกลจากฝั่งแอดมิน
@@ -393,7 +393,7 @@ export default function AdminDashboard() {
       {/* Transaction History Table */}
       <div className="w-full flex flex-col gap-4">
         <h2 className="text-lg font-bold text-slate-100 flex items-center gap-2">
-          <Layers size={18} className="text-emerald-400" />
+          <Layers size={18} className="text-cyan-400" />
           <span>ประวัติธุรกรรมและการชาร์จไฟฟ้าในระบบ (Transaction Logs)</span>
         </h2>
 
@@ -444,13 +444,13 @@ export default function AdminDashboard() {
                       <td className="py-3 px-4 text-right font-mono font-bold">
                         {sess.energyDelivered.toFixed(2)} kWh
                       </td>
-                      <td className="py-3 px-4 text-right font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 text-right font-mono font-bold text-cyan-400">
                         ฿{sess.cost.toLocaleString("th-TH")}
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-block text-3xs font-bold px-2 py-0.5 rounded ${
                           sess.status === "completed" 
-                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/25" 
+                            ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/25" 
                             : sess.status === "charging" 
                             ? "bg-blue-500/10 text-blue-400 border border-blue-500/25 animate-pulse" 
                             : "bg-amber-500/10 text-amber-400 border border-amber-500/25"
