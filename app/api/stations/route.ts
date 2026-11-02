@@ -1,47 +1,27 @@
 import { NextResponse } from "next/server";
-import { readDB, writeDB, updateActiveSessions } from "../db";
+import { chargerService } from "@/lib/services/charger.service";
+import { handleRouteError } from "@/lib/api/http-response";
 
-// GET /api/stations
-export async function GET() {
+export const dynamic = "force-dynamic";
+
+export async function GET(): Promise<NextResponse> {
   try {
-    // Perform simulation tick before returning data
-    updateActiveSessions();
-    
-    const db = readDB();
-    return NextResponse.json({ 
-      success: true, 
-      stations: db.stations,
-      sessions: db.sessions 
+    const state = chargerService.getStationsAndSessions();
+    return NextResponse.json({
+      success: true,
+      stations: state.stations,
+      sessions: state.sessions,
     });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || "Failed to fetch stations" },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    return handleRouteError(error, "Failed to fetch stations");
   }
 }
 
-// POST /api/stations (Reset DB to defaults)
-export async function POST() {
+export async function POST(): Promise<NextResponse> {
   try {
-    // Write back defaults by deleting file or writing initial structure
-    const db = readDB();
-    db.sessions = [];
-    // Reset all connectors to available
-    db.stations = db.stations.map((s) => ({
-      ...s,
-      connectors: s.connectors.map((c) => ({
-        ...c,
-        status: "available",
-        currentSessionId: null
-      }))
-    }));
-    writeDB(db);
-    return NextResponse.json({ success: true, message: "Database reset successful" });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || "Failed to reset database" },
-      { status: 500 }
-    );
+    const { message } = chargerService.resetSystemToDefaults();
+    return NextResponse.json({ success: true, message });
+  } catch (error: unknown) {
+    return handleRouteError(error, "Failed to reset database");
   }
 }

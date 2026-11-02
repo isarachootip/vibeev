@@ -1,81 +1,32 @@
 import { NextResponse } from "next/server";
-import { readDB, writeDB } from "../../db";
+import { ChargerControlInputSchema } from "@/lib/validations/charger.schema";
+import { chargerService } from "@/lib/services/charger.service";
+import {
+  domainErrorToHttpStatus,
+  handleRouteError,
+  parseJsonBody,
+} from "@/lib/api/http-response";
 
-// POST /api/charger/control
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
-    const body = await request.json();
-    const { chargerId, connectorId, action } = body;
+    const parsed = await parseJsonBody(request, ChargerControlInputSchema);
+    if (!parsed.ok) {
+      return parsed.response;
+    }
 
-    if (!chargerId || !connectorId || !action) {
+    const result = chargerService.executeConnectorControl(parsed.data);
+    if (!result.ok) {
       return NextResponse.json(
-        { success: false, error: "Missing required fields" },
-        { status: 400 }
+        { success: false, error: result.error },
+        { status: domainErrorToHttpStatus(result.code) }
       );
     }
 
-    const db = readDB();
-    const station = db.stations.find((s) => s.id === chargerId);
-    const connector = station?.connectors.find((c) => c.id === connectorId);
-
-    if (!station || !connector) {
-      return NextResponse.json(
-        { success: false, error: "Station or Connector not found" },
-        { status: 404 }
-      );
-    }
-
-    if (action === "force_stop") {
-      const sessionId = connector.currentSessionId;
-      if (!sessionId) {
-        return NextResponse.json(
-          { success: false, error: "No active session on this connector" },
-          { status: 400 }
-        );
-      }
-
-      // Find the session and complete it
-      const session = db.sessions.find((s) => s.id === sessionId);
-      if (session) {
-        session.status = "completed";
-        session.endTime = new Date().toISOString();
-        session.powerKW = 0;
-      }
-
-      // Reset connector
-      connector.status = "available";
-      connector.currentSessionId = null;
-
-      writeDB(db);
-      return NextResponse.json({ success: true, message: "Connector force stopped successfully" });
-    }
-
-    if (action === "reset") {
-      const sessionId = connector.currentSessionId;
-      if (sessionId) {
-        const session = db.sessions.find((s) => s.id === sessionId);
-        if (session) {
-          session.status = "completed";
-          session.endTime = new Date().toISOString();
-          session.powerKW = 0;
-        }
-      }
-
-      connector.status = "available";
-      connector.currentSessionId = null;
-
-      writeDB(db);
-      return NextResponse.json({ success: true, message: "Connector reset successfully" });
-    }
-
-    return NextResponse.json(
-      { success: false, error: "Invalid action" },
-      { status: 400 }
-    );
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || "Failed to control charger" },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      success: true,
+      message: result.data.message,
+    });
+  } catch (error: unknown) {
+    return handleRouteError(error, "Failed to control charger");
   }
 }
