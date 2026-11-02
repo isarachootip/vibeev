@@ -11,6 +11,7 @@ export async function GET(): Promise<NextResponse> {
       success: true,
       stations: state.stations,
       sessions: state.sessions,
+      tickets: state.tickets,
     });
   } catch (error: unknown) {
     return handleRouteError(error, "Failed to fetch stations");

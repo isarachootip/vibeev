@@ -154,6 +154,24 @@ export function StationControlList({
                             เชื่อมต่อออนไลน์ปกติ
                           </span>
                         )}
+
+                        {c.status === "offline" && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              onControlConnector(station.id, c.id, "set_online")
+                            }
+                            disabled={isActing}
+                            className="w-full py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 text-3xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer disabled:opacity-50"
+                          >
+                            <Power size={10} />
+                            <span>
+                              {isActing
+                                ? "กำลังส่งคำสั่ง..."
+                                : "เปิดออนไลน์อีกครั้ง (Set Online)"}
+                            </span>
+                          </button>
+                        )}
                       </div>
                     </div>
                   );

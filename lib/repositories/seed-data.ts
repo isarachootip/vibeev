@@ -38,5 +38,6 @@ export function createInitialDatabaseState(): DatabaseState {
   return {
     stations: structuredClone(SEED_STATIONS),
     sessions: [],
+    tickets: [],
   };
 }

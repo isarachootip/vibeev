@@ -4,6 +4,7 @@ import { use } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useReceipt } from "@/hooks/use-receipt";
 import { ReceiptTicketCard } from "@/components/receipt/receipt-ticket-card";
+import { LineIssueTrigger } from "@/components/support/line-issue-trigger";
 
 interface ReceiptPageProps {
   params: Promise<{ sessionId: string }>;
@@ -59,6 +60,15 @@ export default function ReceiptPage({ params }: ReceiptPageProps) {
         <span>เสร็จสิ้นและกลับหน้าหลัก</span>
         <ArrowRight size={16} />
       </button>
+
+      {details && (
+        <LineIssueTrigger
+          chargerId={details.session.chargerId}
+          connectorId={details.session.connectorId}
+          sessionId={details.session.id}
+          buttonLabel="แจ้งปัญหายอดชำระเงิน / หัวชาร์จค้างผ่าน LINE OA"
+        />
+      )}
     </div>
   );
 }

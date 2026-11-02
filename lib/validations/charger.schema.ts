@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { IssueTicketSchema } from "./ticket.schema";
 
 export const ConnectorTypeSchema = z.enum(["CCS2", "Type2", "CHAdeMO"]);
 export type ConnectorType = z.infer<typeof ConnectorTypeSchema>;
@@ -68,6 +69,7 @@ export type ChargingSession = z.infer<typeof ChargingSessionSchema>;
 export const DatabaseStateSchema = z.object({
   stations: z.array(ChargingStationSchema),
   sessions: z.array(ChargingSessionSchema),
+  tickets: z.array(IssueTicketSchema).optional().default([]),
 });
 export type DatabaseState = z.infer<typeof DatabaseStateSchema>;
 
@@ -100,7 +102,11 @@ export const SessionActionInputSchema = z.object({
 });
 export type SessionActionInput = z.infer<typeof SessionActionInputSchema>;
 
-export const ChargerControlActionSchema = z.enum(["force_stop", "reset"]);
+export const ChargerControlActionSchema = z.enum([
+  "force_stop",
+  "reset",
+  "set_online",
+]);
 export type ChargerControlAction = z.infer<typeof ChargerControlActionSchema>;
 
 export const ChargerControlInputSchema = z.object({

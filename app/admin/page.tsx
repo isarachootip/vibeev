@@ -5,18 +5,21 @@ import { useAdminDashboard } from "@/hooks/use-admin-dashboard";
 import { AdminKpiGrid } from "@/components/admin/admin-kpi-grid";
 import { StationControlList } from "@/components/admin/station-control-list";
 import { AnalyticsAndOcppPanel } from "@/components/admin/analytics-and-ocpp-panel";
+import { IssueTicketsPanel } from "@/components/admin/issue-tickets-panel";
 import { TransactionHistoryTable } from "@/components/admin/transaction-history-table";
 
 export default function AdminDashboardPage() {
   const {
     stations,
     sessions,
+    tickets,
     metrics,
     isLoading,
     isActioning,
     error,
     successMsg,
     controlConnector,
+    resolveTicket,
     resetDatabase,
   } = useAdminDashboard();
 
@@ -26,14 +29,14 @@ export default function AdminDashboardPage() {
         <div>
           <div className="flex items-center gap-2 text-2xs text-cyan-400 font-bold uppercase tracking-wider">
             <span className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse" />
-            Live Admin Monitoring Control Panel
+            Live Admin Monitoring & LINE OA Service Control Panel
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight mt-1 text-slate-100 font-sans">
             แผงควบคุมระบบเครือข่าย EV Charger
           </h1>
           <p className="text-sm text-zinc-400 mt-1">
             ยินดีต้อนรับท่านประธาน (President) ติดตามสถานะรายได้ ปริมาณไฟฟ้า
-            และควบคุมเครื่องชาร์จเรียบร้อยในหน้าจอเดียว
+            ควบคุมเครื่องชาร์จ และจัดการเคสแจ้งซ่อมจาก LINE OA ในหน้าจอเดียว
           </p>
         </div>
 
@@ -74,6 +77,12 @@ export default function AdminDashboardPage() {
         />
         <AnalyticsAndOcppPanel stations={stations} />
       </div>
+
+      <IssueTicketsPanel
+        tickets={tickets}
+        isActioning={isActioning}
+        onResolveTicket={resolveTicket}
+      />
 
       <TransactionHistoryTable sessions={sessions} />
     </div>

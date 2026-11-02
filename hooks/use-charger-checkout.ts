@@ -177,6 +177,7 @@ export function useChargerCheckout(stationId: string) {
     startPaymentProcess,
     confirmPayment,
     cancelPaymentModal,
+    reloadStation,
     goHome: () => router.push("/"),
   };
 }

@@ -6,16 +6,19 @@ import type {
   ChargingSession,
   ChargingStation,
 } from "@/lib/validations/charger.schema";
+import type { IssueTicket } from "@/lib/validations/ticket.schema";
 import {
   fetchStationsApi,
   postChargerControlApi,
   resetDatabaseApi,
 } from "@/lib/client/charger-api";
+import { resolveIssueTicketApi } from "@/lib/client/ticket-api";
 import { calculateDashboardMetrics } from "@/lib/domain/dashboard-metrics";
 
 export function useAdminDashboard() {
   const [stations, setStations] = useState<ChargingStation[]>([]);
   const [sessions, setSessions] = useState<ChargingSession[]>([]);
+  const [tickets, setTickets] = useState<IssueTicket[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isActioning, setIsActioning] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -27,6 +30,7 @@ export function useAdminDashboard() {
       if (res.ok) {
         setStations(res.data.stations);
         setSessions(res.data.sessions);
+        setTickets(res.data.tickets);
       } else {
         setError("เกิดปัญหาดึงข้อมูลแดชบอร์ด");
       }
@@ -47,6 +51,7 @@ export function useAdminDashboard() {
           if (res.ok) {
             setStations(res.data.stations);
             setSessions(res.data.sessions);
+            setTickets(res.data.tickets);
           } else {
             setError("เกิดปัญหาดึงข้อมูลแดชบอร์ด");
           }
@@ -83,17 +88,46 @@ export function useAdminDashboard() {
         action,
       });
       if (res.ok) {
-        setSuccessMsg(
-          `ส่งคำสั่ง ${
-            action === "force_stop" ? "หยุดชาร์จ" : "รีเซ็ตหัวชาร์จ"
-          } สำเร็จ`
-        );
+        const actionLabel =
+          action === "force_stop"
+            ? "หยุดชาร์จ"
+            : action === "set_online"
+            ? "เปิดหัวชาร์จออนไลน์"
+            : "รีเซ็ตหัวชาร์จ";
+        setSuccessMsg(`ส่งคำสั่ง ${actionLabel} สำเร็จ`);
         await refreshNow();
       } else {
         setError(res.error);
       }
     } catch {
       setError("เกิดปัญหาการส่งคำสั่งเชื่อมต่อสถานี");
+    } finally {
+      setIsActioning(null);
+      setTimeout(() => setSuccessMsg(""), 3000);
+    }
+  };
+
+  const resolveTicket = async (ticketId: string) => {
+    setIsActioning(`ticket-${ticketId}`);
+    setError("");
+    setSuccessMsg("");
+
+    try {
+      const res = await resolveIssueTicketApi(ticketId, {
+        bringConnectorOnline: true,
+        resolutionNote:
+          "ทีมวิศวกรตรวจสอบและเปิดใช้งานหัวชาร์จตามปกติเรียบร้อยแล้ว",
+      });
+      if (res.ok) {
+        setSuccessMsg(
+          `แก้ไขเคส #${ticketId} สำเร็จ และส่งข้อความแจ้งกลับทาง LINE OA แล้ว`
+        );
+        await refreshNow();
+      } else {
+        setError(res.error);
+      }
+    } catch {
+      setError("เกิดข้อผิดพลาดในการปิดงานซ่อม");
     } finally {
       setIsActioning(null);
       setTimeout(() => setSuccessMsg(""), 3000);
@@ -133,12 +167,14 @@ export function useAdminDashboard() {
   return {
     stations,
     sessions,
+    tickets,
     metrics,
     isLoading,
     isActioning,
     error,
     successMsg,
     controlConnector,
+    resolveTicket,
     resetDatabase,
   };
 }

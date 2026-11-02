@@ -6,6 +6,7 @@ import { useChargerCheckout } from "@/hooks/use-charger-checkout";
 import { ConnectorSelector } from "@/components/charger/connector-selector";
 import { ChargingTargetPicker } from "@/components/charger/charging-target-picker";
 import { PromptPayModal } from "@/components/charger/promptpay-modal";
+import { LineIssueTrigger } from "@/components/support/line-issue-trigger";
 
 interface ChargerPageProps {
   params: Promise<{ id: string }>;
@@ -31,6 +32,7 @@ export default function ChargerPage({ params }: ChargerPageProps) {
     startPaymentProcess,
     confirmPayment,
     cancelPaymentModal,
+    reloadStation,
     goHome,
   } = useChargerCheckout(id);
 
@@ -132,6 +134,13 @@ export default function ChargerPage({ params }: ChargerPageProps) {
             <CreditCard size={18} />
             <span>ชำระเงินและเริ่มชาร์จ</span>
           </button>
+
+          <LineIssueTrigger
+            chargerId={id}
+            connectorId={selectedConnectorId || undefined}
+            buttonLabel="พบปัญหาที่ตู้ชาร์จ? แจ้งด่วนผ่าน LINE OA"
+            onReported={() => void reloadStation()}
+          />
         </>
       )}
 

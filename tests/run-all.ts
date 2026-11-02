@@ -2,9 +2,16 @@ import { validationsSuite } from "./validations.test";
 import { physicsSuite } from "./charging-physics.test";
 import { lifecycleSuite } from "./session-lifecycle.test";
 import { serviceSuite } from "./charger-service.test";
+import { issueLifecycleSuite } from "./issue-lifecycle.test";
 
 async function main(): Promise<void> {
-  const suites = [validationsSuite, physicsSuite, lifecycleSuite, serviceSuite];
+  const suites = [
+    validationsSuite,
+    physicsSuite,
+    lifecycleSuite,
+    serviceSuite,
+    issueLifecycleSuite,
+  ];
   let totalPassed = 0;
   let totalFailed = 0;
 

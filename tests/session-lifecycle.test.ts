@@ -29,6 +29,7 @@ function createBaseDb(): DatabaseState {
       },
     ],
     sessions: [],
+    tickets: [],
   };
 }
 

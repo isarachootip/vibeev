@@ -49,6 +49,7 @@ function createActiveFixture(
         carPlate: "กข-1234",
       },
     ],
+    tickets: [],
   };
 }
 

@@ -8,6 +8,10 @@ import {
   type CreatePaymentInput,
   type SessionAction,
 } from "@/lib/validations/charger.schema";
+import {
+  IssueTicketSchema,
+  type IssueTicket,
+} from "@/lib/validations/ticket.schema";
 
 const ApiErrorSchema = z.object({
   success: z.literal(false),
@@ -19,6 +23,7 @@ const StationsResponseSchema = z.discriminatedUnion("success", [
     success: z.literal(true),
     stations: z.array(ChargingStationSchema),
     sessions: z.array(ChargingSessionSchema).optional().default([]),
+    tickets: z.array(IssueTicketSchema).optional().default([]),
   }),
   ApiErrorSchema,
 ]);
@@ -45,7 +50,11 @@ export type ClientResult<T> =
   | { ok: false; error: string };
 
 export async function fetchStationsApi(): Promise<
-  ClientResult<{ stations: ChargingStation[]; sessions: ChargingSession[] }>
+  ClientResult<{
+    stations: ChargingStation[];
+    sessions: ChargingSession[];
+    tickets: IssueTicket[];
+  }>
 > {
   const res = await fetch("/api/stations", { cache: "no-store" });
   const raw: unknown = await res.json();
@@ -62,6 +71,7 @@ export async function fetchStationsApi(): Promise<
     data: {
       stations: parsed.data.stations,
       sessions: parsed.data.sessions,
+      tickets: parsed.data.tickets,
     },
   };
 }

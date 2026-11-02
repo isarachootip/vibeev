@@ -46,6 +46,8 @@ export function applyConnectorControl(
   const message =
     input.action === "force_stop"
       ? "Connector force stopped successfully"
+      : input.action === "set_online"
+      ? "Connector set online successfully"
       : "Connector reset successfully";
 
   return { ok: true, data: { message }, state };
@@ -56,6 +58,7 @@ export function resetAllStationsAndSessions(
 ): DatabaseState {
   return {
     sessions: [],
+    tickets: [],
     stations: inputState.stations.map((station) => ({
       ...station,
       connectors: station.connectors.map((connector) => ({

@@ -5,6 +5,11 @@ import type {
   DatabaseState,
   SessionAction,
 } from "../validations/charger.schema";
+import type {
+  CreateTicketInput,
+  IssueTicket,
+  ResolveTicketInput,
+} from "../validations/ticket.schema";
 import { simulateActiveSessions } from "../domain/charging-physics";
 import {
   applySessionAction,
@@ -16,9 +21,14 @@ import {
   resetAllStationsAndSessions,
 } from "../domain/connector-control";
 import {
+  createIssueTicketInState,
+  resolveIssueTicketInState,
+} from "../domain/issue-lifecycle";
+import {
   defaultChargerRepository,
   type ChargerRepository,
 } from "../repositories/json-db.repository";
+import { lineMessagingService } from "./line-messaging.service";
 
 export class ChargerService {
   constructor(private readonly repository: ChargerRepository) {}
@@ -87,6 +97,33 @@ export class ChargerService {
     const result = applyConnectorControl(state, input, now);
     if (result.ok) {
       this.repository.writeState(result.state);
+    }
+    return result;
+  }
+
+  async reportIssueTicket(
+    input: CreateTicketInput,
+    now: Date = new Date()
+  ): Promise<DomainResult<IssueTicket>> {
+    const state = this.readAndTickState(now);
+    const result = createIssueTicketInState(state, input, now);
+    if (result.ok) {
+      this.repository.writeState(result.state);
+      await lineMessagingService.sendIssueCreatedAlert(result.data);
+    }
+    return result;
+  }
+
+  async resolveIssueTicket(
+    ticketId: string,
+    input: ResolveTicketInput,
+    now: Date = new Date()
+  ): Promise<DomainResult<IssueTicket>> {
+    const state = this.readAndTickState(now);
+    const result = resolveIssueTicketInState(state, ticketId, input, now);
+    if (result.ok) {
+      this.repository.writeState(result.state);
+      await lineMessagingService.sendTicketResolvedReply(result.data);
     }
     return result;
   }

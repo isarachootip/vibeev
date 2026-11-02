@@ -5,6 +5,7 @@ import { StopCircle } from "lucide-react";
 import { useChargingSession } from "@/hooks/use-charging-session";
 import { SocCircularGauge } from "@/components/charging/soc-circular-gauge";
 import { TelemetryCards } from "@/components/charging/telemetry-cards";
+import { LineIssueTrigger } from "@/components/support/line-issue-trigger";
 
 interface ChargingPageProps {
   params: Promise<{ sessionId: string }>;
@@ -94,6 +95,13 @@ export default function ChargingPage({ params }: ChargingPageProps) {
             )}
             <span>สั่งหยุดชาร์จทันที (Stop)</span>
           </button>
+
+          <LineIssueTrigger
+            chargerId={session.chargerId}
+            connectorId={session.connectorId}
+            sessionId={session.id}
+            buttonLabel="แจ้งเหตุฉุกเฉิน / ถอดสายไม่ออกผ่าน LINE OA"
+          />
         </>
       )}
     </div>
